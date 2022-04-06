@@ -1,6 +1,21 @@
 # Next.js 12 React Server Components Demo (Alpha)
 
-Try the demo live here: [**next-rsc-hn.vercel.app**](https://next-rsc-hn.vercel.app).
+First look on React Server components.
+
+## SSR vs RSC
+
+Examples with `Fast3G`
+
+**SSR** - page is build complete on the server and then it get sent to client
+
+https://user-images.githubusercontent.com/28633412/161990116-10094794-aa94-4847-9c9e-302dc6f7c808.mov
+
+---
+
+**Server Components** - server start to build the page and then start sending ready components to the client
+
+https://user-images.githubusercontent.com/28633412/161990196-a69b94b8-bcfe-48f9-9bf1-38b886e83215.mov
+
 
 ## Introduction
 
