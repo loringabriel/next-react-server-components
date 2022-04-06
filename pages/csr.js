@@ -1,23 +1,27 @@
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from "react";
 
 // Client Components
-import Page from '../components/page.client'
-import Story from '../components/story.client'
+import Page from "../components/page.client";
+import Story from "../components/story.client";
 
 // Utils
-import fetchData from '../lib/fetch-data'
-import { transform } from '../lib/get-item'
-import useData from '../lib/use-data'
-import Skeletons from '../components/skeletons'
+import fetchData from "../lib/fetch-data";
+import { transform } from "../lib/get-item";
+import useData from "../lib/use-data";
+import Skeletons from "../components/skeletons";
 
 function StoryWithData({ id }) {
-  if (typeof window === 'undefined') return <Skeletons />
-  const { data } = useData(`s-${id}`, () => fetchData(`item/${id}`).then(transform))
-  return <Story {...data} />
+  if (typeof window === "undefined") return <Skeletons />;
+  const { data } = useData(`s-${id}`, () =>
+    fetchData(`item/${id}`, 1000).then(transform)
+  );
+  return <Story {...data} />;
 }
 
 function NewsWithData() {
-  const { data: storyIds } = useData('top', () => fetchData('topstories'))
+  const { data: storyIds } = useData("top", () =>
+    fetchData("topstories", 3000)
+  );
   return (
     <>
       {storyIds.slice(0, 30).map((id) => {
@@ -25,17 +29,17 @@ function NewsWithData() {
           <Suspense key={id} fallback={<Skeletons />}>
             <StoryWithData id={id} />
           </Suspense>
-        )
+        );
       })}
     </>
-  )
+  );
 }
 
 export default function News() {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
   return (
     <Page>
       {mounted ? (
@@ -46,9 +50,9 @@ export default function News() {
         <Skeletons />
       )}
     </Page>
-  )
+  );
 }
 
 export const config = {
-  runtime: 'edge',
-}
+  runtime: "edge",
+};
